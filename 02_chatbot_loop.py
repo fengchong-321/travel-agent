@@ -19,5 +19,12 @@ g.add_edge(START, "chatbot")
 g.add_edge("chatbot", END)
 app = g.compile()
 
+while True:
+    user = input("你: ")
+    if user in ("q", "exit", "quit"):
+        break
+    result = app.invoke({"messages": [("user", user)]})
+    print("AI:", result["messages"][-1].content)
+
 result = app.invoke({"messages": [("user", "你好，一句话介绍你自己")]})
 print(result["messages"][-1].content)
